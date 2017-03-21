@@ -6,7 +6,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.MessageFormat;
+
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,8 +33,7 @@ public class AprioriTool {
 	// 过程中计算出来频繁项集的ID集合
 	private ArrayList<String[]> resultItemID;
 
-	public AprioriTool(String filePath, int minSupportCount) {
-		this.filePath = filePath;
+	public AprioriTool(int minSupportCount) {
 		this.minSupportCount = minSupportCount;
 		readDataFile();
 	}
@@ -39,24 +42,46 @@ public class AprioriTool {
 	 * 从文件中读取数据
 	 */
 	private void readDataFile() {
-		File file = new File(filePath);
+	
 		ArrayList<String[]> dataArray = new ArrayList<String[]>();
 
-		try {
-			BufferedReader in = new BufferedReader(new FileReader(file));
+
 			String str;
 			String[] tempArray;
-			while ((str = in.readLine()) != null) {
-				System.out.println(str);
-				tempArray = str.split(" ");					// tempArray 类型 String[]
-//				for(String test : tempArray)			
-//					System.out.println(test);
-				dataArray.add(tempArray);					//dataArray 类型  	ArrayList<String[]> dataArray 
-			}
-			in.close();
-		} catch (IOException e) {
-			e.getStackTrace();
-		}
+			
+		
+			ArrayList <String> test_as=new ArrayList<String>();
+			String s1="T1 1 2 5";
+			String s2="T2 2 4";
+			String s3="T3 2 3";
+			String s4="T4 1 2 4";
+			String s5="T5 1 3";
+			String s6="T6 2 3";
+			String s7="T7 1 3";
+			String s8="T8 1 2 3 5";
+			String s9="T9 1 2 3";
+			
+			test_as.add(s1);
+			test_as.add(s2);
+			test_as.add(s3);
+			test_as.add(s4);
+			test_as.add(s5);
+			test_as.add(s6);
+			test_as.add(s7);
+			test_as.add(s8);
+			test_as.add(s9);
+			   Iterator<String> it1 = test_as.iterator();
+		        while(it1.hasNext()){
+		        	 str=it1.next();
+		        	System.out.println(str);
+		            tempArray = str.split(" ");					
+					dataArray.add(tempArray);
+		            
+		        }
+
+		        
+		        
+	
 
 		String[] temp = null;
 		totalGoodsIDs = new ArrayList<>();

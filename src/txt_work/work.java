@@ -1,14 +1,9 @@
 package txt_work;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
  
 public class work {
 	
@@ -52,8 +47,22 @@ public class work {
 		}
 		return num;
 	}
+	public static ArrayList<String> getas() throws SQLException{
+		 ArrayList<String> total_text = new ArrayList();
+	        ArrayList<String> list = new ArrayList<String>();
+	        ArrayList<String> word_num = new ArrayList<String>();
+	        
+	        list = addDatalist();        //
+	        JdbcConnect conn = new JdbcConnect();
+	        total_text = conn.getSummary("select summary from t_record limit 1,2", "summary");
+	        word_num = addWordnum(list,total_text);
+	    
+		return word_num;
+	}
+			
 	
 
+	//main函数 仅用于测试
 	public static void main(String[] args) throws SQLException {
     	
         ArrayList<String> total_text = new ArrayList();
@@ -68,20 +77,20 @@ public class work {
         total_text = conn.getSummary("select summary from t_record limit 1,2", "summary");
         word_num = addWordnum(list,total_text);
     
-        	// <String>  test[]=word_num.toArray();
-        	 String test[] = new String[word_num.size()];
-        	 test = word_num.toArray(test);
-        	 
+        
+    	 /*   //word_num 中（ArrayList<String>） --> （String[]）             
+        	String test[] = new String[word_num.size()];
+        	
+        	 test = word_num.toArray(test);			    	 
         	 for(String temp:test){
         		 System.out.println(temp);
         	 }
+        	 */
         	    
-        	    
-        
-        
-        System.out.println(word_num);			//      word_num类型  ArrayList<String>
-        
-
+   
+        System.out.println(word_num);		         	//     类型  ArrayList<String>
+         
+         
         
 //        
         
