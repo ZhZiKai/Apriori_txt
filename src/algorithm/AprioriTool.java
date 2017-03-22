@@ -33,43 +33,25 @@ public class AprioriTool {
 	// 过程中计算出来频繁项集的ID集合
 	private ArrayList<String[]> resultItemID;
 
-	public AprioriTool(int minSupportCount) {
+	public AprioriTool(ArrayList<String> input_as,int minSupportCount) {
 		this.minSupportCount = minSupportCount;
-		readDataFile();
+		readDataFile(input_as);
 	}
 
 	/**
 	 * 从文件中读取数据
 	 */
-	private void readDataFile() {
+	private void readDataFile(ArrayList<String> temp) {
 	
 		ArrayList<String[]> dataArray = new ArrayList<String[]>();
 
 
 			String str;
 			String[] tempArray;
-			
-		
+					
 			ArrayList <String> test_as=new ArrayList<String>();
-			String s1="T1 1 2 5";
-			String s2="T2 2 4";
-			String s3="T3 2 3";
-			String s4="T4 1 2 4";
-			String s5="T5 1 3";
-			String s6="T6 2 3";
-			String s7="T7 1 3";
-			String s8="T8 1 2 3 5";
-			String s9="T9 1 2 3";
-			
-			test_as.add(s1);
-			test_as.add(s2);
-			test_as.add(s3);
-			test_as.add(s4);
-			test_as.add(s5);
-			test_as.add(s6);
-			test_as.add(s7);
-			test_as.add(s8);
-			test_as.add(s9);
+			test_as=temp;
+		
 			   Iterator<String> it1 = test_as.iterator();
 		        while(it1.hasNext()){
 		        	 str=it1.next();
@@ -83,14 +65,14 @@ public class AprioriTool {
 		        
 	
 
-		String[] temp = null;
+		String[] temp1 = null;
 		totalGoodsIDs = new ArrayList<>();
 		for (String[] array : dataArray) {
-			temp = new String[array.length - 1];
-			System.arraycopy(array, 1, temp, 0, array.length - 1);
+			temp1 = new String[array.length - 1];
+			System.arraycopy(array, 1, temp1, 0, array.length - 1);
 
 			// 将事务ID加入列表吧中
-			totalGoodsIDs.add(temp);
+			totalGoodsIDs.add(temp1);
 		}
 	}
 

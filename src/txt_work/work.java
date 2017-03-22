@@ -47,6 +47,7 @@ public class work {
 		}
 		return num;
 	}
+	//返回值作为Client.java的输入，类型  ArrayList<String>
 	public static ArrayList<String> getas() throws SQLException{
 		 ArrayList<String> total_text = new ArrayList();
 	        ArrayList<String> list = new ArrayList<String>();
@@ -54,7 +55,7 @@ public class work {
 	        
 	        list = addDatalist();        //
 	        JdbcConnect conn = new JdbcConnect();
-	        total_text = conn.getSummary("select summary from t_record limit 1,2", "summary");
+	        total_text = conn.getSummary("select summary from t_record limit 1,20", "summary");
 	        word_num = addWordnum(list,total_text);
 	    
 		return word_num;

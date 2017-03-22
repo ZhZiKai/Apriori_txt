@@ -16,20 +16,18 @@ import txt_work.work;
 public class Client { 
 	
 	
-	public static ArrayList<String> get() throws Exception {
+	public static ArrayList<String> get_input() throws Exception {
 		  ArrayList<String> word_num1 = new ArrayList<String>();
-		  ArrayList<String> list =  work.getas();
-		  return word_num1= work.getas();
+		  word_num1= work.getas();
+		  return word_num1;
 			
 		
 	}
-	
-	
-	
-	
-	public static void main(String[] args){
 		
-		AprioriTool tool = new AprioriTool( 2);
+	public static void main(String[] args) throws Exception{
+		ArrayList<String> tempas=new ArrayList<String>();
+		tempas=get_input();
+		AprioriTool tool = new AprioriTool( tempas,2);
 		tool.printAttachRule(0.7);
 	}
 }
