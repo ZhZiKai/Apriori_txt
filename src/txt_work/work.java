@@ -20,7 +20,11 @@ public class work {
             while((theLine=reader.readLine())!=null){
                     list.add(theLine);
             }
+            
+            //≤‚ ‘ System.out.println(list.get(3587));
+            
         }
+		
         catch (IOException e) {
                 e.printStackTrace();
         }
@@ -58,9 +62,9 @@ public class work {
 	        
 	        list = addDatalist();        //
 	        JdbcConnect conn = new JdbcConnect();
-	        total_text = conn.getSummary("select summary from t_record limit 1,1000", "summary");
+	        total_text = conn.getSummary("select summary from t_record limit 1,5000", "summary");
 	        word_num = addWordnum(list,total_text);
-	    
+	     
 		return word_num;
 	}
 			

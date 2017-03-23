@@ -10,17 +10,15 @@ import txt_work.work;
  * @author zzk
  *
  */
-
-
-
 public class Client { 
 	
 	
 	public static ArrayList<String> get_input() throws Exception {
 		  ArrayList<String> word_num1 = new ArrayList<String>();
 		  word_num1= work.getas();
-		  return word_num1;
-			
+		  System.out.println();
+		  return word_num1;                  // word_num1是   ArrayList<String>类型  作为Apriori算法的输入。
+												// 									
 		
 	}
 		

@@ -1,5 +1,6 @@
 package algorithm;
 
+import txt_work.work;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,6 +22,10 @@ import java.util.Map;
  * @author zzk
  * 
  */
+/**
+ * @author zzk
+ *
+ */
 public class AprioriTool {
 	// 最小支持度计数
 	private int minSupportCount;
@@ -35,6 +40,7 @@ public class AprioriTool {
 
 	public AprioriTool(ArrayList<String> input_as,int minSupportCount) {
 		this.minSupportCount = minSupportCount;
+		getlist();
 		readDataFile(input_as);
 	}
 
@@ -55,7 +61,7 @@ public class AprioriTool {
 			   Iterator<String> it1 = test_as.iterator();
 		        while(it1.hasNext()){
 		        	 str=it1.next();
-		        	System.out.println(str);
+		        	//System.out.println(str);
 		            tempArray = str.split(" ");					
 					dataArray.add(tempArray);
 		            
@@ -108,6 +114,22 @@ public class AprioriTool {
 
 		return iSContain;
 	}
+	
+	/**
+	 * 获取源数据存放在  test_ls 中。
+	 */
+	public static ArrayList<String> getlist(){
+		
+		ArrayList <String> test_ls=new ArrayList<String >();
+		test_ls=work.addDatalist();		
+		System.out.println(test_ls.get(4+1));
+		return test_ls;
+		
+	}
+	
+	
+	
+	
 
 	/**
 	 * 项集进行连接运算
@@ -202,16 +224,22 @@ public class AprioriTool {
 		 */
 		
 		int tempk=currentNum-1;
-
-			System.out.println("频繁" + 3 + "项集：");
+			
+		ArrayList<String> temp_ls=getlist();
+		
+			System.out.println("频繁" +2 + "项集：");
 			for (FrequentItem i : resultItem) {																			
-				if (i.getLength() == 3) {		
+				if (i.getLength() == 2) {		
 					System.out.print(i.getCount());
 //					System.out.println(i.getLength());
 					System.out.print(" {");
 				
 					
 					for (String t : i.getIdArray()) {  	//getIdArray方法返回 return idArray; 	类型 private String[] idArray;
+						
+						int temp_key=Integer.valueOf(t);
+					   	System.out.print(temp_ls.get(temp_key));		
+						
 						System.out.print(t + " ");
 					}
 					System.out.print("} ");
@@ -363,75 +391,6 @@ public class AprioriTool {
 	public void printAttachRule(double minConf) {
 		// 进行连接和剪枝操作
 		computeLink();
-
-//		int count1 = 0;
-//		int count2 = 0;
-//		ArrayList<String> childGroup1;
-//		ArrayList<String> childGroup2;
-//		String[] group1;
-//		String[] group2;
-//		// 以最后一个频繁项集做关联规则的输出
-//		String[] array = resultItem.get(resultItem.size() - 1).getIdArray();
-//		// 子集总数，计算的时候除去自身和空集
-//		int totalNum = (int) Math.pow(2, array.length);
-//		String[] temp;
-//		// 二进制数组，用来代表各个子集
-//		int[] binaryArray;
-//		// 除去头和尾部
-//		for (int i = 1; i < totalNum - 1; i++) {
-//			binaryArray = new int[array.length];
-//			numToBinaryArray(binaryArray, i);
-//
-//			childGroup1 = new ArrayList<>();
-//			childGroup2 = new ArrayList<>();
-//			count1 = 0;
-//			count2 = 0;
-//			// 按照二进制位关系取出子集
-//			for (int j = 0; j < binaryArray.length; j++) {
-//				if (binaryArray[j] == 1) {
-//					childGroup1.add(array[j]);
-//				} else {
-//					childGroup2.add(array[j]);
-//				}
-//			}
-//
-//			group1 = new String[childGroup1.size()];
-//			group2 = new String[childGroup2.size()];
-//
-//			childGroup1.toArray(group1);
-//			childGroup2.toArray(group2);
-//
-//			for (String[] a : totalGoodsIDs) {
-//				if (isStrArrayContain(a, group1)) {
-//					count1++;
-//
-//					// 在group1的条件下，统计group2的事件发生次数
-//					if (isStrArrayContain(a, group2)) {
-//						count2++;
-//					}
-//				}
-//			}
-//
-//			// {A}-->{B}的意思为在A的情况下发生B的概率
-//			System.out.print("{");
-//			for (String s : group1) {
-//				System.out.print(s + ", ");
-//			}
-//			System.out.print("}-->");
-//			System.out.print("{");
-//			for (String s : group2) {
-//				System.out.print(s + ", ");
-//			}
-//			System.out.print(MessageFormat.format(
-//					"},confidence(置信度)：{0}/{1}={2}", count2, count1, count2
-//							* 1.0 / count1));
-//			if (count2 * 1.0 / count1 < minConf) {
-//				// 不符合要求，不是强规则
-//				System.out.println("由于此规则置信度未达到最小置信度的要求，不是强规则");
-//			} else {
-//				System.out.println("为强规则");
-//			}
-//		}
 
 	}
 
