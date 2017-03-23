@@ -30,7 +30,9 @@ public class work {
 	public static ArrayList<String> addWordnum(ArrayList<String> list, ArrayList<String> text){
 		ArrayList num = new ArrayList();
 		int cnt=0;
-//		System.out.println(text.size());
+		System.out.println("******");
+		System.out.println(text.size());
+		System.out.println("******");
 		while (cnt<text.size()){
 			String wordNumStr="T"+Integer.toString(cnt)+" ";
 			String nowText=(String)text.get(cnt);
@@ -47,6 +49,7 @@ public class work {
 		}
 		return num;
 	}
+	
 	//返回值作为Client.java的输入，类型  ArrayList<String>
 	public static ArrayList<String> getas() throws SQLException{
 		 ArrayList<String> total_text = new ArrayList();
@@ -55,7 +58,7 @@ public class work {
 	        
 	        list = addDatalist();        //
 	        JdbcConnect conn = new JdbcConnect();
-	        total_text = conn.getSummary("select summary from t_record limit 1,20", "summary");
+	        total_text = conn.getSummary("select summary from t_record limit 1,1000", "summary");
 	        word_num = addWordnum(list,total_text);
 	    
 		return word_num;
@@ -75,7 +78,7 @@ public class work {
 //        System.out.println(total_text.size());
         list = addDatalist();        //
         JdbcConnect conn = new JdbcConnect();
-        total_text = conn.getSummary("select summary from t_record limit 1,2", "summary");
+        total_text = conn.getSummary("select summary from t_record limit 1,1000", "summary");
         word_num = addWordnum(list,total_text);
     
         

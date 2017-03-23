@@ -203,25 +203,22 @@ public class AprioriTool {
 		
 		int tempk=currentNum-1;
 
-			System.out.println("频繁" + tempk + "项集：");
+			System.out.println("频繁" + 3 + "项集：");
 			for (FrequentItem i : resultItem) {																			
-				if (i.getLength() == tempk) {		
-//					System.out.println(i.getCount());
+				if (i.getLength() == 3) {		
+					System.out.print(i.getCount());
 //					System.out.println(i.getLength());
-					System.out.print("{");
+					System.out.print(" {");
 				
-//					String test[]=i.getIdArray();
-//					for (String t : test) {
-//						System.out.print(t + " ");
-//					}
 					
 					for (String t : i.getIdArray()) {  	//getIdArray方法返回 return idArray; 	类型 private String[] idArray;
 						System.out.print(t + " ");
 					}
 					System.out.print("} ");
+					System.out.println();
 				}
 			}
-			System.out.println();
+		
 //		}
 	}
 

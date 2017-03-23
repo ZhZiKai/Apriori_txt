@@ -38,7 +38,7 @@ public class JdbcConnect {
 		return conn;
 	}
 	
-	public ResultSet getResultset(String sql){
+	public ResultSet getResultset(String sql){          // 返回查询结果
 		try {
 		 conn=getConn(url,user,password);
 		 statement = conn.createStatement();
@@ -50,7 +50,7 @@ public class JdbcConnect {
 		return rs;
 	}
 	
-	public int update(String sql){
+	public int update(String sql){						// 返回更新是否成功
 		int i=0;
 		try {
 		 conn=getConn(url,user,password);
@@ -94,7 +94,7 @@ public class JdbcConnect {
 	}
 	public static void main(String[] args) throws SQLException {
 		JdbcConnect jdbcConnect=new JdbcConnect();
-		ArrayList<String> result=jdbcConnect.getSummary("select summary from t_record limit 1,3", "summary");
+		ArrayList<String> result=jdbcConnect.getSummary("select summary from t_record limit 1,1", "summary");
 		System.out.println(result);
     }
 }
