@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import updateDB.save_DB;
+import algorithm.related;
 
 
 public class JdbcConnect { 
@@ -50,17 +52,23 @@ public class JdbcConnect {
 		return rs;
 	}
 	
-	public int update(String sql){						// 返回更新是否成功
-		int i=0;
+	public int update(ArrayList<related> res){						// 返回更新是否成功
+		int flag=0;
 		try {
 		 conn=getConn(url,user,password);
 		 statement = conn.createStatement();
-		  i=statement.executeUpdate(sql);
+		 for(related re: res){
+			 String query = "insert into t_related (support, related) values('"
+			            + re.getSupport() + "','" + re.getRelated() + "')";
+			    statement.addBatch(query);
+		 }
+		 statement.executeBatch();		 
+		 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return i;
+		return flag;
 	}
 	
 	public ArrayList<String> getSummary(String sql,String field) throws SQLException{

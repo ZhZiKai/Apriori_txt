@@ -34,20 +34,29 @@ public class AprioriTool {
 	// 每个事务中的商品ID
 	private ArrayList<String[]> totalGoodsIDs;
 	// 过程中计算出来的所有频繁项集列表
-	private ArrayList<FrequentItem> resultItem;
+	private static ArrayList<FrequentItem> resultItem;
 	// 过程中计算出来频繁项集的ID集合
 	private ArrayList<String[]> resultItemID;
+	
+	private static ArrayList<related> rs;
 
 	public AprioriTool(ArrayList<String> input_as,int minSupportCount) {
 		this.minSupportCount = minSupportCount;
 		getlist();
-		readDataFile(input_as);
+		readData(input_as);
 	}
 
+	
+	public static  ArrayList<FrequentItem>  get_res(){
+		return  resultItem;		
+	}
+	
+	
+	
 	/**
 	 * 从文件中读取数据
 	 */
-	private void readDataFile(ArrayList<String> temp) {
+	private void readData(ArrayList<String> temp) {
 	
 		ArrayList<String[]> dataArray = new ArrayList<String[]>();
 
@@ -116,25 +125,19 @@ public class AprioriTool {
 	}
 	
 	/**
-	 * 获取源数据存放在  test_ls 中。
+	 * 从txt_work包中addDatalist()方法 获取源数据 list --> test_ls.
 	 */
 	public static ArrayList<String> getlist(){
 		
 		ArrayList <String> test_ls=new ArrayList<String >();
-		test_ls=work.addDatalist();		
-		System.out.println(test_ls.get(4+1));
-		return test_ls;
-		
+		test_ls=work.addDatalist();			
+		return test_ls;		
 	}
 	
-	
-	
-	
-
 	/**
 	 * 项集进行连接运算
 	 */
-	private void computeLink() {
+	private ArrayList<related> computeLink() {
 		// 连接计算的终止数，k项集必须算到k-1子项集为止
 		int endNum = 0;
 		// 当前已经进行连接运算到几项集,开始时就是1项集
@@ -170,6 +173,7 @@ public class AprioriTool {
 		// 按照商品ID进行排序，否则连接计算结果将会不一致，将会减少
 		Collections.sort(list);
 		resultItem.addAll(list);
+
 
 		String[] array1;
 		String[] array2;
@@ -217,37 +221,56 @@ public class AprioriTool {
 		}
 		
 
-		// 输出频繁项集
-		/*
-			过程中计算出来的所有频繁项集列表
-			private ArrayList<FrequentItem> resultItem;
-		 */
 		
-		int tempk=currentNum-1;
+		/*
+			展示所有在 resultItem 中的频繁项集对象  i ，即关联规则。
 			
-		ArrayList<String> temp_ls=getlist();
+		 */		
+		int tempk=currentNum-1;
+		
+				// 从 getlist() 方法中获取 源数据 , test_ls --> temp_ls.
+		   ArrayList<String> temp_ls=getlist();			 
+		
 		
 			System.out.println("频繁" +2 + "项集：");
-			for (FrequentItem i : resultItem) {																			
-				if (i.getLength() == 2) {		
-					System.out.print(i.getCount());
-//					System.out.println(i.getLength());
-					System.out.print(" {");
+			
+			// 此方法中 属性  resultItem 存放 算法 结果。
+			ArrayList<related> test_rs=new ArrayList<related>();
+			
+		
+			for (FrequentItem i : resultItem) {	
 				
+				String single_str=new String();
+				if (i.getLength() == 2) {	
 					
-					for (String t : i.getIdArray()) {  	//getIdArray方法返回 return idArray; 	类型 private String[] idArray;
+					// 创建一个result 类的 实例化对象。
+					related rs_item=new related();
+										
+					System.out.print("支持度 "+i.getCount());
+					rs_item.setSupport(i.getCount());
+					
+					System.out.print(" {");				
+					single_str="";
+					for (String t : i.getIdArray()) {  	//getIdArray方法返回 return idArray; 	类型 private String[] idArray;					 
+						//打印源数据集
 						
-						int temp_key=Integer.valueOf(t);
-					   	System.out.print(temp_ls.get(temp_key));		
+						int temp_key=Integer.valueOf(t);	
+						String temp_str=temp_ls.get(temp_key);
 						
-						System.out.print(t + " ");
-					}
+					   	System.out.print(temp_str+"@ ");	
+					   	single_str=single_str+" "+temp_str;	
+					   	}
+					rs_item.setRelated(single_str);
+					
 					System.out.print("} ");
 					System.out.println();
+					
+					test_rs.add(rs_item);
+					
 				}
 			}
 		
-//		}
+					return  test_rs;
 	}
 
 	/**
@@ -388,9 +411,12 @@ public class AprioriTool {
 	 * @param minConf
 	 *            最小置信度阈值
 	 */
-	public void printAttachRule(double minConf) {
+	public ArrayList<related> showRelated(double minConf) {
 		// 进行连接和剪枝操作
-		computeLink();
+		ArrayList<related> temp_rs=new ArrayList<related>();
+		temp_rs=computeLink();
+		get_res();
+		return temp_rs;
 
 	}
 

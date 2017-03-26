@@ -19,12 +19,9 @@ public class work {
             String theLine=null;
             while((theLine=reader.readLine())!=null){
                     list.add(theLine);
-            }
+            }              
             
-            //测试 System.out.println(list.get(3587));
-            
-        }
-		
+        }		
         catch (IOException e) {
                 e.printStackTrace();
         }
@@ -34,9 +31,9 @@ public class work {
 	public static ArrayList<String> addWordnum(ArrayList<String> list, ArrayList<String> text){
 		ArrayList num = new ArrayList();
 		int cnt=0;
-		System.out.println("******");
-		System.out.println(text.size());
-		System.out.println("******");
+		System.out.println("***addWordnum()***");
+		System.out.println("数据库总记录数： "+text.size());
+		System.out.println("***addWordnum()***");
 		while (cnt<text.size()){
 			String wordNumStr="T"+Integer.toString(cnt)+" ";
 			String nowText=(String)text.get(cnt);
@@ -60,9 +57,13 @@ public class work {
 	        ArrayList<String> list = new ArrayList<String>();
 	        ArrayList<String> word_num = new ArrayList<String>();
 	        
-	        list = addDatalist();        //
+	        list = addDatalist();     
+	        
+	        // JDBC连接数据库。
 	        JdbcConnect conn = new JdbcConnect();
 	        total_text = conn.getSummary("select summary from t_record limit 1,5000", "summary");
+	        
+	        // 方法addWordnum() 返回值类型是Apriori算法的输入类型。
 	        word_num = addWordnum(list,total_text);
 	     
 		return word_num;
