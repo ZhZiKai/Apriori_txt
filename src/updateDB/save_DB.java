@@ -16,7 +16,7 @@ public class save_DB {
 	public static ArrayList<String> lists=AprioriTool.getlist();	
   
 	
-	/**        °Ñ resultÀà  µÄÊµÀı»¯¶ÔÏó i ´æÈëÊı¾İ¿â¡£ 
+	/**        ï¿½ï¿½ resultï¿½ï¿½  ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ i ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ¿â¡£ 
 	 * @param temp_rs
 	 */
 	public  static void save_res(ArrayList<related> temp_rs){
@@ -35,7 +35,7 @@ public class save_DB {
 		for ( related i : temp_rs) {		
 							
 			// 
-				System.out.print("Ö§³Ö¶È ÊÇ"+i.getSupport());				
+				System.out.print("æ”¯æŒåº¦æ˜¯"+i.getSupport());				
 				
 				System.out.print(" {");
 													
@@ -53,7 +53,7 @@ public class save_DB {
 	
 	
 	public static void main(String[] args) {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ÉµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		//get_temp_res();
 	}
 
